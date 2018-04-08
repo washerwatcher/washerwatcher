@@ -23,8 +23,8 @@ class Landing extends React.Component {
             <Grid.Column textAlign='center'>
               <Icon size='huge' name='checked calendar' inverted/>
               <Header as='h1' inverted>Timestamped Notes</Header>
-              <Header as='h3' inverted>The time when a washer's status changes is shown. Also, other timestamped notes,
-              such as tips or problems will also be timestamped.</Header>
+              <Header as='h3' inverted>The time when a washer's status changes is shown, as well as other timestamped notes,
+              such as tips or problems.</Header>
             </Grid.Column>
 
           </Grid>
