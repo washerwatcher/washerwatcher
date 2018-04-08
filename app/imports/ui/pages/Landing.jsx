@@ -11,7 +11,7 @@ class Landing extends React.Component {
             <Grid.Column textAlign='center'>
               <Icon size='huge' name='file text' inverted/>
               <Header as='h1' inverted>Know When a Washing Machine is Available in Your Dorm</Header>
-              <Header as='h3' inverted>For each washer, you can see its current status</Header>
+              <Header as='h3' inverted>For each washer, you can see its current status.</Header>
             </Grid.Column>
 
             <Grid.Column textAlign='center'>
