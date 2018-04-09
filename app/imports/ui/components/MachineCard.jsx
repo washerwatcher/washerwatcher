@@ -3,6 +3,11 @@ import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+function formatDate(data) {
+  const options = { weekday: 'long', month: 'short', day: 'numeric' };
+  return data.toLocaleTimeString('en-us', options);
+}
+
 class MachineCard extends React.Component {
   render() {
     return (
@@ -13,7 +18,7 @@ class MachineCard extends React.Component {
             </Card.Header>
             <Card.Meta>
               <span>
-                Last updated: {this.props.machine.lastUpdated}
+                Last updated: {formatDate(this.props.machine.lastUpdated)}
               </span>
             </Card.Meta>
             <Card.Description>
