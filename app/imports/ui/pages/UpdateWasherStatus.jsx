@@ -52,7 +52,7 @@ class UpdateWasherStatus extends React.Component {
               <DropdownStatusSelection />
               <Form>
                 <Form.Field>
-                  <Header as='h4' style={{marginTop: '14px'}}>Add Note(optional)</Header>
+                  <Header as='h4' style={{marginTop: '14px'}}>Add Note (optional)</Header>
                   <Input />
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
