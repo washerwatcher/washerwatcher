@@ -19,6 +19,7 @@ import Signout from '../pages/Signout';
 import ListMachine from '../pages/ListMachine';
 import UpdateWasherStatus from '../pages/UpdateWasherStatus';
 import AddWasherAdmin from '../pages/AddWasherAdmin';
+import Info from '../pages/Info';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
