@@ -11,6 +11,7 @@ const MachineSchema = new SimpleSchema({
   dorm: String,
   inUse: Boolean,
   lastUpdated: Date,
+  owner: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
