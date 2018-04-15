@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 function formatDate(data) {
   const options = { weekday: 'long', month: 'short', day: 'numeric' };
@@ -26,6 +26,9 @@ class MachineCard extends React.Component {
                   <span>In Use</span>
               ) : <span>Available</span>}
             </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <Link to={`/notes/${this.props.machine._id}`}>Edit</Link>
           </Card.Content>
         </Card>
     );
