@@ -28,7 +28,7 @@ class MachineCard extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/notes/${this.props.machine._id}`}>Edit</Link>
+            <Link to={`/notes/${this.props.machine._id}`}>Notes</Link>
           </Card.Content>
         </Card>
     );
