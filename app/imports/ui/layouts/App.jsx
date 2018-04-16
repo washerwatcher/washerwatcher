@@ -19,6 +19,7 @@ import ListMachine from '../pages/ListMachine';
 import UpdateWasherStatus from '../pages/UpdateWasherStatus';
 import AddWasherAdmin from '../pages/AddWasherAdmin';
 import Info from '../pages/Info';
+import Preferences from '../pages/Preferences';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -38,6 +39,7 @@ class App extends React.Component {
               <ProtectedRoute path="/faq" component={Info}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+              <ProtectedRoute path="/preferences" component={Preferences}/>
               <AdminProtectedRoute path="/admin" component={AddWasherAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>

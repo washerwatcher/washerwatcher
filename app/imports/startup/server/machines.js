@@ -11,16 +11,16 @@ function addData(data) {
 * Created here because we cannot use new Date() in JSON */
 if (Machines.find().count() === 0) {
   console.log('Creating default machines');
-  addData({ name: 'Machine 1', dorm: 'Dorm 1', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
-  addData({ name: 'Machine 2', dorm: 'Dorm 2', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
-  addData({ name: 'Machine 3', dorm: 'Dorm 3', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
-  addData({ name: 'Machine 4', dorm: 'Dorm 4', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
+  addData({ name: 'Machine 1', dorm: 'Frear Hall', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
+  addData({ name: 'Machine 2', dorm: 'Hale Anuenu', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
+  addData({ name: 'Machine 3', dorm: 'Gateway House', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
+  addData({ name: 'Machine 4', dorm: 'Johnson Hall', inUse: false, lastUpdated: new Date(), owner: 'john@foo.com' });
 }
 
- /** This subscription publishes only the documents associated with the logged in user */
+ /** This subscription publishes only the documents associated with the logged in user and is within the same dorm */
 Meteor.publish('Machine', function publish() {
-  if (this.userId) {
-    return Machines.find();
+  if (this.userId && Meteor.user().dorm) {
+    return Machines.find({ dorm: Meteor.user().dorm });
   }
   return this.ready();
 });
