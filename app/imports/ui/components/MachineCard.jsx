@@ -17,9 +17,12 @@ class MachineCard extends React.Component {
               {this.props.machine.name}
             </Card.Header>
             <Card.Meta>
-              <span>
+              <p>
+                  Location: {this.props.machine.dorm}
+              </p>
+              <p>
                 Last updated: {formatDate(this.props.machine.lastUpdated)}
-              </span>
+              </p>
             </Card.Meta>
             <Card.Description>
               <span>{this.props.machine.inUse}</span>
