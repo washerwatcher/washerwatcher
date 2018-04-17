@@ -25,7 +25,7 @@ if (Machines.find().count() === 0) {
 Meteor.publish('Machine', function publish() {
   if (this.userId) {
     const dorm = Meteor.user().dorm;
-    if (dorm) {
+    if (dorm && dorm !== 'All') {
         return Machines.find({ dorm });
     }
     return Machines.find({});
