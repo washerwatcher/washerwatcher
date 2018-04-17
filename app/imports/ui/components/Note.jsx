@@ -9,7 +9,7 @@ class Note extends React.Component {
     return (
         <Feed.Event >
           <Feed.Content>
-            <Feed.Date content={this.props.note.createdAt} />
+            <Feed.Date content={this.props.note.createdAt.toLocaleDateString('en-US')} />
             <Feed.Summary>
               {this.props.note.note}
             </Feed.Summary>
@@ -21,7 +21,7 @@ class Note extends React.Component {
 
 /** Require a document to be passed to this component. */
 Note.propTypes = {
-  note: PropTypes.object.isRequired,
+  note: PropTypes.object,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

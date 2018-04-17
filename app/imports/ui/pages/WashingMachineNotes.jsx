@@ -1,57 +1,24 @@
 import React from 'react';
-import { Stuffs } from '/imports/api/stuff/stuff';
-import { Feed, Image, Icon, Card, Grid, Segment, Header, Form, Button } from 'semantic-ui-react';
-// import AutoForm from 'uniforms-semantic/AutoForm';
-// import TextField from 'uniforms-semantic/TextField';
-// import NumField from 'uniforms-semantic/NumField';
-// import SelectField from 'uniforms-semantic/SelectField';
-// import SubmitField from 'uniforms-semantic/SubmitField';
-// import HiddenField from 'uniforms-semantic/HiddenField';
-// import ErrorsField from 'uniforms-semantic/ErrorsField';
-import { Bert } from 'meteor/themeteorchef:bert';
+import { Grid, Header, Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
-import Note from '../components/Note';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Machines } from '../../api/machine/machine';
+import { Notes } from '../../api/note/note';
+import AddNote from '../components/AddNote';
+import NoteFeed from '../components/NoteFeed';
+import MachineNotecard from '../components/MachineNotecard';
 
 /** Renders the Page for adding a document. */
 class WashingMachineNotes extends React.Component {
 
-  /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
-  constructor(props) {
-    super(props);
-    this.submit = this.submit.bind(this);
-    this.insertCallback = this.insertCallback.bind(this);
-    this.formRef = null;
-  }
-
-  notes = [{
-    createdAt: '4/12/18',
-    note: 'breaks down all the time',
-  },
-    {
-      createdAt: '4/18/18',
-      note: "don't put too much detergent",
-    },
-  ];
-
-  /** Notify the user of the results of the submit. If successful, clear the form. */
-  insertCallback(error) {
-    if (error) {
-      Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
-    } else {
-      Bert.alert({ type: 'success', message: 'Add succeeded' });
-      this.formRef.reset();
-    }
-  }
-
-  /** On submit, insert the data. */
-  submit(data) {
-    const { name, quantity, condition } = data;
-    const owner = Meteor.user().username;
-    Stuffs.insert({ name, quantity, condition, owner }, this.insertCallback);
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+  render() {
+    return (this.props.ready) ? this.renderPage() : <Loader>Getting data</Loader>;
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-  render() {
+  renderPage() {
     return (
         <Grid container centered columns={2}>
           <Grid.Row>
@@ -59,47 +26,13 @@ class WashingMachineNotes extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Card>
-                <Image
-                    src='https://assets.ajmadison.com/image/upload/c_limit,f_auto,fl_lossy.progressive,h_1000,q_auto,w_1000/v1/ajmadison/images/large_no_watermark/wm3270cw_lg_washer_1.jpg'/>
-                <Card.Content>
-                  <Card.Header>
-                    Washer #1
-                  </Card.Header>
-                  <Card.Meta>
-        <span className='date'>
-          at Example dorm
-        </span>
-                  </Card.Meta>
-                  <Card.Description>
-                    LG WM3270CW
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='checkmark'/>
-                    Available
-                  </a>
-                </Card.Content>
-              </Card>
+              <MachineNotecard name={this.props.doc.name} dorm={this.props.doc.dorm} inUse={this.props.doc.inUse}/>
             </Grid.Column>
             <Grid.Column>
               <Header as='h3' textAlign='center'>Notes</Header>
-              <Segment>
-                <Feed>
-                  {this.notes.map((note, index) => <Note key={index} note={note}/>)}
-                </Feed>
-              </Segment>
+              <NoteFeed notes={this.props.notes} />
               <Header as='h3' textAlign='center'>Add Note</Header>
-              <Segment>
-                <Form>
-                  <Form.Field>
-                    <label>Add Note</label>
-                    <input/>
-                  </Form.Field>
-                  <Button type='submit'>Submit</Button>
-                </Form>
-              </Segment>
+              <AddNote machineId={this.props.doc._id} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -107,4 +40,26 @@ class WashingMachineNotes extends React.Component {
   }
 }
 
-export default WashingMachineNotes;
+/** Require the presence of a Machine document in the props object
+ * as well as a notes array.
+ * Uniforms adds 'model' to the props, which we use. */
+WashingMachineNotes.propTypes = {
+  doc: PropTypes.object,
+  notes: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const documentId = match.params._id;
+  // console.log(documentId);
+  // Get access to Contacts documents.
+  const subscription = Meteor.subscribe('Notes');
+  const subscription2 = Meteor.subscribe('Machine');
+  return {
+    doc: Machines.findOne(documentId),
+    notes: Notes.find({ machineId: documentId }).fetch(),
+    ready: (subscription.ready() && subscription2.ready()),
+  };
+})(WashingMachineNotes);
