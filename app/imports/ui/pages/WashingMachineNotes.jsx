@@ -19,8 +19,6 @@ class WashingMachineNotes extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
-    console.log(this.props.doc.name);
-    console.log(this.props.doc.dorm);
     return (
         <Grid container centered columns={2}>
           <Grid.Row>
@@ -28,7 +26,7 @@ class WashingMachineNotes extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <MachineNotecard name={this.props.doc.name} dorm={this.props.doc.dorm} />
+              <MachineNotecard name={this.props.doc.name} dorm={this.props.doc.dorm} inUse={this.props.doc.inUse}/>
             </Grid.Column>
             <Grid.Column>
               <Header as='h3' textAlign='center'>Notes</Header>

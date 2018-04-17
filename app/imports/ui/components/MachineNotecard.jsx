@@ -27,7 +27,7 @@ class MachineNotecard extends React.Component {
           <Card.Content extra>
             <a>
               <Icon name='checkmark'/>
-              Available
+              {this.props.inUse}
             </a>
           </Card.Content>
         </Card>
@@ -39,6 +39,7 @@ class MachineNotecard extends React.Component {
 MachineNotecard.propTypes = {
   name: PropTypes.string.isRequired,
   dorm: PropTypes.string.isRequired,
+  inUse: PropTypes.string.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
