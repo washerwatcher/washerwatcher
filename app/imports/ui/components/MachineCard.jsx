@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
+import { Button, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -22,13 +22,12 @@ class MachineCard extends React.Component {
               </span>
             </Card.Meta>
             <Card.Description>
-              {this.props.machine.inUse ? (
-                  <span>In Use</span>
-              ) : <span>Available</span>}
+              <span>{this.props.machine.inUse}</span>
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/notes/${this.props.machine._id}`}>Notes</Link>
+            <Button as={Link} to={`/notes/${this.props.machine._id}`}>Notes</Button>
+            <Button floated='right' as={Link} to={`/update/${this.props.machine._id}`}>Update</Button>
           </Card.Content>
         </Card>
     );

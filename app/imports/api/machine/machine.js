@@ -9,9 +9,13 @@ const Machines = new Mongo.Collection('Machines');
 const MachineSchema = new SimpleSchema({
   name: String,
   dorm: String,
-  inUse: Boolean,
+  inUse: {
+    type: String,
+    allowedValues: ['Available', 'In Use', 'Out of Order'],
+    defaultValue: 'Available',
+  },
+  update: String,
   lastUpdated: Date,
-  owner: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
