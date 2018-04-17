@@ -25,7 +25,8 @@ class MachineCard extends React.Component {
               </p>
             </Card.Meta>
             <Card.Description>
-              <span>{this.props.machine.inUse}</span>
+              <p>{this.props.machine.update}</p>
+              <p>{this.props.machine.inUse}</p>
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
