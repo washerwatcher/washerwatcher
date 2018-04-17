@@ -26,9 +26,9 @@ if (Meteor.users.find().count() === 0) {
   }
 }
 
-Meteor.publish('UserData', function publish() {
-  if (this.userId) {
-      return Meteor.users.find({ _id: Meteor.userId() }, { fields: { dorm: 1 } });
-  }
-  return this.ready();
-});
+// Meteor.publish('UserData', function publish() {
+//   if (this.userId) {
+//       return Meteor.users.find({ _id: Meteor.userId() }, { fields: { dorm: 1 } });
+//   }
+//   return this.ready();
+// });

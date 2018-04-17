@@ -8,6 +8,10 @@ Meteor.methods({
             dorm: String,
         });
         try {
+            if (Meteor.userId() !== userData.id) {
+                throw new Meteor.Error('Invalid user ID', 'Cannot update the data of a different user!');
+            }
+
             Meteor.users.update(userData.id, {
                 $set: {
                     dorm: userData.dorm,

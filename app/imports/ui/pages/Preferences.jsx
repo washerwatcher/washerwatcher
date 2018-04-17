@@ -50,12 +50,12 @@ class Preferences extends React.Component {
     /** Handle preference settings */
     handleSubmit() {
         if (this.state.dorm) {
-            const userData = {
+            const data = {
                 id: Meteor.userId(),
                 dorm: this.state.dorm,
             };
 
-            Meteor.call('updateUserDorm', userData, this.insertCallback);
+            Meteor.call('updateUserDorm', data, this.insertCallback);
         }
     }
 
@@ -87,18 +87,20 @@ class Preferences extends React.Component {
     }
 }
 
-/** Require an array of Machine documents in the props. */
-Preferences.propTypes = {
-    userData: PropTypes.object.isRequired,
-    ready: PropTypes.bool.isRequired,
-};
+// /** Require user data to be supplied in props */
+// Preferences.propTypes = {
+//     userData: PropTypes.object.isRequired,
+//     ready: PropTypes.bool.isRequired,
+// };
+//
+// /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+// export default withTracker(() => {
+//     // Get access to UserData.
+//     const subscription = Meteor.subscribe('UserData');
+//     return {
+//         userData: Meteor.user(),
+//         ready: subscription.ready(),
+//     };
+// })(Preferences);
 
-/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(() => {
-    // Get access to UserData.
-    const subscription = Meteor.subscribe('UserData');
-    return {
-        userData: Meteor.users.findOne(),
-        ready: subscription.ready(),
-    };
-})(Preferences);
+export default Preferences;
