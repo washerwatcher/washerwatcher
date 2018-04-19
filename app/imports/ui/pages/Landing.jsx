@@ -22,21 +22,20 @@ class Landing extends React.Component {
               <Grid.Column textAlign='center'>
                 <Icon size='huge' name='group' inverted/>
                 <Header as='h1' inverted>Individual Accounts</Header>
-                <Image src='/images/Register.PNG'/>
                 <Header as='h3' inverted>When a user creates an account, it will be personalized towards them</Header>
+                <Image src='/images/Register.PNG'/>
               </Grid.Column>
               <Grid.Column textAlign='center'>
                 <Icon size='huge' name='file text' inverted/>
                 <Header as='h1' inverted>Know When a Washing Machine is Available in Your Dorm</Header>
-                <Header as='h3' inverted>For each washer, you can see its current status.</Header>
+                <Header as='h3' inverted>See the availability of every washing machine in your dorm</Header>
+                <Image src='/images/Availability.PNG'/>
               </Grid.Column>
-
               <Grid.Column textAlign='center'>
                 <Icon size='huge' name='checked calendar' inverted/>
                 <Header as='h1' inverted>Timestamped Notes</Header>
-                <Header as='h3' inverted>The time when a washer's status changes is shown, as well as other timestamped
-                  notes,
-                  such as tips or problems.</Header>
+                <Header as='h3' inverted>View all timestamped notes that users feel other users should know about their washer</Header>
+                <Image src='/images/Notes.PNG'/>
               </Grid.Column>
             </Grid>
           </Grid>
