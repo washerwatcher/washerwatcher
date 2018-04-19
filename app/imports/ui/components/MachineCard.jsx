@@ -103,7 +103,7 @@ class MachineCard extends React.Component {
                                 <Container>
                                     <Grid.Row>
                                         <Grid.Column>
-                                            <Header as='h4' textAlign='center'>Notes</Header>
+                                            <Header as='h4' textAlign='center' style={{ paddingTop: '12px' }}>Notes</Header>
                                             <NoteFeed notes={this.props.notes} />
                                             <Header as='h4' textAlign='center'>Add Note</Header>
                                             <AddNote machineId={this.props.machine._id} />
