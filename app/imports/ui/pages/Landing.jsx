@@ -6,15 +6,15 @@ class Landing extends React.Component {
   render() {
     return (
         <div className='washerwatcher-landing-background'>
-          <Container fluid>
-          <Grid className='landing'>
-            <Grid.Row color='grey' centered>
-              <Header as='h1' inverted>Welcome to Washer Watcher!</Header>
+          <Grid>
+            <Grid.Row centered>
+              <Grid.Column textAlign='center'>
+                <Header as='h1' inverted> Welcome to Washer Watcher!</Header>
+                <Header as='h3' inverted>Know when a washer is available in your dorm</Header>
+              </Grid.Column>
             </Grid.Row>
-            <Grid.Row color='grey' centered>
-              <Header as='h3' inverted>Know when a washer is available in your dorm</Header>
-            </Grid.Row>
-          </Grid>
+          <Grid.Row className='blankspace'>
+          </Grid.Row>
 
             <Grid container stackable centered columns={3}>
             <Grid.Column textAlign='center'>
@@ -36,9 +36,8 @@ class Landing extends React.Component {
                 notes,
                 such as tips or problems.</Header>
             </Grid.Column>
-
           </Grid>
-          </Container>
+          </Grid>
         </div>
     );
   }
