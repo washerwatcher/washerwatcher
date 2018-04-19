@@ -11,22 +11,22 @@ if (Meteor.isServer) {
 
     // Generates: POST on /api/users and GET, DELETE /api/users/:id for
     // Meteor.users collection
-    Api.addCollection(Meteor.users, {
-        excludedEndpoints: ['getAll', 'put', 'patch'],
-        routeOptions: {
-            authRequired: true,
-        },
-        endpoints: {
-            post: {
-                authRequired: false,
-            },
-            delete: {
-                roleRequired: 'admin',
-            },
-        },
-    });
+    // Api.addCollection(Meteor.users, {
+    //     excludedEndpoints: ['getAll', 'put', 'patch'],
+    //     routeOptions: {
+    //         authRequired: true,
+    //     },
+    //     endpoints: {
+    //         post: {
+    //             authRequired: false,
+    //         },
+    //         delete: {
+    //             roleRequired: 'admin',
+    //         },
+    //     },
+    // });
 
-    // Maps to: /api/machines/:id
+    // Maps to: /api/machines/:name
     Api.addRoute('machines/:name', { authRequired: false }, {
         get: function () {
             const machine = Machines.findOne({ name: this.urlParams.name });
