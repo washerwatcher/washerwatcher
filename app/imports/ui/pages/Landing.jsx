@@ -9,8 +9,8 @@ class Landing extends React.Component {
           <Grid>
             <Grid.Row centered>
               <Grid.Column textAlign='center'>
-                <Header as='h1' inverted> Welcome to Washer Watcher!</Header>
-                <Header as='h3' inverted>Know when a washer is available in your dorm</Header>
+                <Header as='h1' inverted className='title'> Welcome to Washer Watcher!</Header>
+                <Header as='h3' inverted className='subheader'>Know when a washer is available in your dorm</Header>
               </Grid.Column>
             </Grid.Row>
           <Grid.Row className='blankspace'>

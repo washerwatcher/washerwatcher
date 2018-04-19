@@ -3,3 +3,11 @@
   background-image: url('/images/washer.jpg');
   background-size: cover;
 }
+
+.title {
+  font-size: 72px !important;
+}
+
+.subheader {
+  font-size: 36px !important;
+}
