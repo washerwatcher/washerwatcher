@@ -5,6 +5,7 @@ import { Grid, Icon, Header, Container } from 'semantic-ui-react';
 class Landing extends React.Component {
   render() {
     return (
+
         <div className='washerwatcher-landing-background'>
           <Grid>
             <Grid.Row centered>

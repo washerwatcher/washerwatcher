@@ -1,6 +1,7 @@
 .washerwatcher-landing-background {
   padding: 30px 10px 30px 10px;
-  background-image: url('/images/washer.jpg');
+  background: linear-gradient( rgba(0,0,0,.3), rgba(0,0,0,.3) ),
+  url('/images/washer.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -10,4 +11,15 @@
 
 .subheader {
   font-size: 36px !important;
+}
+
+.overlay {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.5);
 }
