@@ -13,7 +13,7 @@ class Landing extends React.Component {
                 <Header as='h3' inverted className='subheader'>Know when a washer is available in your dorm</Header>
               </Grid.Column>
             </Grid.Row>
-            
+
             <Grid.Row className='blankspace'>
             </Grid.Row>
 
