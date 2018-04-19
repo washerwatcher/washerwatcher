@@ -1,5 +1,7 @@
 .washerwatcher-landing-background {
   background: url('/images/washer.jpg') no-repeat center center fixed;
+  background-image: linear-gradient( rgba(0,0,0,.3), rgba(0,0,0,.3) ),
+  url('/images/washer.jpg');
   background-size: cover;
   margin-top: 30px;
 }
@@ -11,4 +13,15 @@
 
 .introbar {
   margin-bottom: 40px;
+}
+
+.overlay {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.5);
 }

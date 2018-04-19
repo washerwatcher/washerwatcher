@@ -15,6 +15,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Notes } from '../../api/note/note';
 import AddNote from '../components/AddNote';
 import NoteFeed from '../components/NoteFeed';
+import WasherStatus from '../components/WasherStatus';
 
 function formatDate(data) {
   const options = { weekday: 'long', month: 'short', day: 'numeric' };
@@ -64,10 +65,10 @@ class MachineCard extends React.Component {
                 Last updated: {formatDate(this.props.machine.lastUpdated)}
               </p>
             </Card.Meta>
-            <Card.Description>
-              <p>{this.props.machine.update}</p>
-              <p>{this.props.machine.inUse}</p>
-            </Card.Description>
+            <WasherStatus inUse={this.props.machine.inUse} />
+            <Card.Meta>
+              <span>{this.props.machine.update}</span>
+            </Card.Meta>
           </Card.Content>
           <Card.Content extra>
             <Button as={Link} to={`/notes/${this.props.machine._id}`}>Notes</Button>
