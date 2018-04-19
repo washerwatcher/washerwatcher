@@ -1,14 +1,5 @@
 .washerwatcher-landing-background {
-  background: url('/images/washer.jpg') no-repeat center center fixed;
+  padding: 30px 10px 30px 10px;
+  background-image: url('/images/washer.jpg');
   background-size: cover;
-  margin-top: 30px;
-}
-
-.landing{
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.introbar {
-  margin-bottom: 40px;
 }
