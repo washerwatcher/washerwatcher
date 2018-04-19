@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Icon, Header, Container } from 'semantic-ui-react';
+import { Grid, Icon, Header, Image } from 'semantic-ui-react';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -14,17 +14,17 @@ class Landing extends React.Component {
                 <Header as='h3' inverted className='subheader'>Know when a washer is available in your dorm</Header>
               </Grid.Column>
             </Grid.Row>
-            
+
             <Grid.Row className='blankspace'>
             </Grid.Row>
 
-            <Grid.Column textAlign='center'>
-              <Icon size='huge' name='group' inverted/>
-              <Header as='h1' inverted>Individual Accounts</Header>
-              <Header as='h3' inverted>When a user creates an account, it will be personalized towards them</Header>
-            </Grid.Column>
-
             <Grid container stackable centered columns={3}>
+              <Grid.Column textAlign='center'>
+                <Icon size='huge' name='group' inverted/>
+                <Header as='h1' inverted>Individual Accounts</Header>
+                <Image src='/images/Register.PNG'/>
+                <Header as='h3' inverted>When a user creates an account, it will be personalized towards them</Header>
+              </Grid.Column>
               <Grid.Column textAlign='center'>
                 <Icon size='huge' name='file text' inverted/>
                 <Header as='h1' inverted>Know When a Washing Machine is Available in Your Dorm</Header>
