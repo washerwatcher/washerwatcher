@@ -45,7 +45,7 @@ class UpdateWasherStatus extends React.Component {
                 <HiddenField name='dorm'/>
                 <HiddenField name='lastUpdated' value={new Date()} />
               </Segment>
-            </AutoForm>
+          </AutoForm>
           </Grid.Column>
         </Grid>
     );
