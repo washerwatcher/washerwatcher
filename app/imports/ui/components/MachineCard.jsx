@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Button, Card, Modal, Grid, Header, Segment, Container } from 'semantic-ui-react';
 import { Machines, MachineSchema } from '/imports/api/machine/machine';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -36,6 +37,8 @@ class MachineCard extends React.Component {
     this.state = { modalOpen: false };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.deleteCallback = this.deleteCallback.bind(this);
   }
 
   handleOpen() {
@@ -54,20 +57,30 @@ class MachineCard extends React.Component {
         Bert.alert({ type: 'success', message: 'Update succeeded' })));
   }
 
+  deleteCallback(error) {
+      if (error) {
+          Bert.alert({ type: 'danger', message: `Machine could not be deleted: ${error.message}` });
+      } else {
+          Bert.alert({ type: 'success', message: 'Machine deleted' });
+      }
+  }
+
+  handleDelete() {
+    const machine = this.props.machine;
+    Meteor.call('removeMachine', { _id: machine._id, name: machine.name, dorm: machine.dorm }, this.deleteCallback);
+  }
+
   render() {
     return (
         <Card centered>
           <Card.Content>
             <Card.Header>
               {this.props.machine.name}
+              {Roles.userIsInRole(Meteor.userId(), 'admin') && <Button negative floated='right' size='tiny' icon='close' labelPosition='right' content='Delete' onClick={this.handleDelete}/>}
             </Card.Header>
             <Card.Meta>
-              <p>
-                Location: {this.props.machine.dorm}
-              </p>
-              <p>
-                Last updated: {formatDate(this.props.machine.lastUpdated)}
-              </p>
+              <p>Location: {this.props.machine.dorm}</p>
+              <p>Last updated: {formatDate(this.props.machine.lastUpdated)}</p>
             </Card.Meta>
             <WasherStatus inUse={this.props.machine.inUse}/>
             <Card.Meta>
