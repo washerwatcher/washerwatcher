@@ -9,16 +9,13 @@ import { Roles } from 'meteor/alanning:roles';
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '10px'};
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted color='grey'>
+      <Menu attached="top" borderless inverted color='grey'>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Header inverted as='h1'>Washer Watcher</Header>
         </Menu.Item>
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/machines" key='machines'>Check Availability</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/update" key='update'>Update Washer Status</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/notes" key='notes'>Washer Notes</Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/faq" key='faq'>FAQ</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (

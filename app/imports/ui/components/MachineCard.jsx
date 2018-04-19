@@ -23,33 +23,37 @@ function formatDate(data) {
 }
 
 const inlineStyle = {
-    modal: {
-        marginTop: '0px !important',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
+  modal: {
+    marginTop: '0px !important',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 };
 
 class MachineCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { modalOpen: false };
-        this.handleOpen = this.handleOpen.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-    handleOpen() {
-        this.setState({ modalOpen: true });
-    }
-    handleClose() {
-        this.setState({ modalOpen: false });
-    }
-    /** On successful submit, insert the data. */
-    submit(data) {
-        const { name, dorm, inUse, update, lastUpdated, _id } = data;
-        Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
-            Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
-            Bert.alert({ type: 'success', message: 'Update succeeded' })));
-    }
+  constructor(props) {
+    super(props);
+    this.state = { modalOpen: false };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleOpen() {
+    this.setState({ modalOpen: true });
+  }
+
+  handleClose() {
+    this.setState({ modalOpen: false });
+  }
+
+  /** On successful submit, insert the data. */
+  submit(data) {
+    const { name, dorm, inUse, update, lastUpdated, _id } = data;
+    Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
+        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
+        Bert.alert({ type: 'success', message: 'Update succeeded' })));
+  }
+
   render() {
     return (
         <Card centered>
@@ -59,13 +63,13 @@ class MachineCard extends React.Component {
             </Card.Header>
             <Card.Meta>
               <p>
-                  Location: {this.props.machine.dorm}
+                Location: {this.props.machine.dorm}
               </p>
               <p>
                 Last updated: {formatDate(this.props.machine.lastUpdated)}
               </p>
             </Card.Meta>
-            <WasherStatus inUse={this.props.machine.inUse} />
+            <WasherStatus inUse={this.props.machine.inUse}/>
             <Card.Meta>
               <span>{this.props.machine.update}</span>
             </Card.Meta>
@@ -74,50 +78,53 @@ class MachineCard extends React.Component {
             <Button as={Link} to={`/notes/${this.props.machine._id}`}>Notes</Button>
             <Button floated='right' as={Link} to={`/update/${this.props.machine._id}`}>Update</Button>
           </Card.Content>
-            <Card.Content extra>
-                <Modal trigger={<Button onClick={this.handleOpen}>Show Modal</Button>} open={this.state.modalOpen} onClose={this.handleClose} style={inlineStyle.modal}>
-                    <Modal.Header>
-                        Update Washer
-                        <br/>
-                        {this.props.machine.name} at {this.props.machine.dorm}
-                    </Modal.Header>
-                    <Modal.Content scrolling>
-                        <Grid container centered>
-                            <Grid.Column>
-                                <Container>
-                                    <Grid.Row>
-                                        <Header as='h4' textAlign='center'>Update Status</Header>
-                                        <AutoForm schema={MachineSchema} onSubmit={this.submit} model={this.props.machine}>
-                                            <Segment>
-                                                <SelectField name='inUse'/>
-                                                <TextField name='update'/>
-                                                <SubmitField value='Submit'/>
-                                                <ErrorsField/>
-                                                <HiddenField name='name'/>
-                                                <HiddenField name='dorm'/>
-                                                <HiddenField name='lastUpdated' value={new Date()} />
-                                            </Segment>
-                                        </AutoForm>
-                                    </Grid.Row>
-                                </Container>
-                                <Container>
-                                    <Grid.Row>
-                                        <Grid.Column>
-                                            <Header as='h4' textAlign='center' style={{ paddingTop: '12px' }}>Notes</Header>
-                                            <NoteFeed notes={this.props.notes} />
-                                            <Header as='h4' textAlign='center'>Add Note</Header>
-                                            <AddNote machineId={this.props.machine._id} />
-                                        </Grid.Column>
-                                    </Grid.Row>
-                                </Container>
-                            </Grid.Column>
-                        </Grid>
-                    </Modal.Content>
-                    <Modal.Actions>
-                        <Button negative icon='close' labelPosition='right' content='Close' onClick={this.handleClose} />
-                    </Modal.Actions>
-                </Modal>
-            </Card.Content>
+          <Card.Content extra>
+            <Modal trigger={<Button onClick={this.handleOpen}>Show Modal</Button>} open={this.state.modalOpen}
+                   onClose={this.handleClose} style={inlineStyle.modal}>
+              <Modal.Header>
+                Update Washer
+                <br/>
+                {this.props.machine.name} at {this.props.machine.dorm}
+              </Modal.Header>
+              <Modal.Content scrolling>
+                <Grid container centered>
+                  <Grid.Column>
+                    <Container>
+                      <Grid.Row>
+                        <Header as='h4' textAlign='center'>Update Status</Header>
+                        <AutoForm schema={MachineSchema} onSubmit={this.submit} model={this.props.machine}>
+                          <Segment>
+                            <SelectField name='inUse'/>
+                            <TextField name='update'/>
+                            <SubmitField value='Submit'/>
+                            <ErrorsField/>
+                            <HiddenField name='name'/>
+                            <HiddenField name='dorm'/>
+                            <HiddenField name='lastUpdated' value={new Date()}/>
+                          </Segment>
+                        </AutoForm>
+                      </Grid.Row>
+                    </Container>
+                    <Container>
+                      <Grid.Row>
+                        <Grid.Column>
+                          <Header as='h4' textAlign='center'
+                                  style={{ paddingTop: '12px' }}>Notes</Header>
+                          <NoteFeed
+                              notes={this.props.notes.filter(machine => machine.machineId === this.props.machine._id)}/>
+                          <Header as='h4' textAlign='center'>Add Note</Header>
+                          <AddNote machineId={this.props.machine._id}/>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Container>
+                  </Grid.Column>
+                </Grid>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button negative icon='close' labelPosition='right' content='Close' onClick={this.handleClose}/>
+              </Modal.Actions>
+            </Modal>
+          </Card.Content>
         </Card>
     );
   }
@@ -126,15 +133,15 @@ class MachineCard extends React.Component {
 /** Require a document to be passed to this component. */
 MachineCard.propTypes = {
   machine: PropTypes.object.isRequired,
-    notes: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired,
+  notes: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withRouter(withTracker(() => {
-    const subscription = Meteor.subscribe('Notes');
-    return {
-        notes: Notes.find({}).fetch(),
-        ready: subscription.ready(),
-    };
+  const subscription = Meteor.subscribe('Notes');
+  return {
+    notes: Notes.find({}).fetch(),
+    ready: subscription.ready(),
+  };
 })(MachineCard));
