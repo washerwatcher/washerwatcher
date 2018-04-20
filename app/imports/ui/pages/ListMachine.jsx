@@ -19,7 +19,7 @@ class ListMachines extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">Washing Machines</Header>
+          <Header as="h2" textAlign="center" style={{ marginTop: '12px' }}>Washing Machines</Header>
             {this.props.machines.length === 0 ?
                 <Message>
                     <Message.Header>
