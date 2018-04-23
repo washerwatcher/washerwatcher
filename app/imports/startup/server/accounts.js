@@ -18,7 +18,7 @@ function createUser(email, password, role) {
   if (role === 'super-admin') {
       Roles.addUsersToRoles(userID, 'super-admin');
   }
-  if (role === 'user' || !role) {
+  if (role === 'user') {
       Roles.addUsersToRoles(userID, 'user');
   }
 }
@@ -86,11 +86,25 @@ Meteor.methods({
             role: String,
         });
         try {
-            if (Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+            if (Roles.userIsInRole(Meteor.userId(), 'super-admin') || Meteor.isServer) {
                 Roles.setUserRoles(userData.id, userData.role);
             }
         } catch (exception) {
             throw new Meteor.Error('500', exception.message);
         }
-    }
+    },
+    createUserAcc(userData) {
+        check(userData, {
+            email: String,
+            username: String,
+            password: String,
+            dorm: String,
+        });
+        try {
+            const userId = Accounts.createUser({ email: userData.email, username: userData.email, password: userData.password, dorm: userData.dorm });
+            Roles.addUsersToRoles(userId, 'user');
+        } catch (exception) {
+            throw new Meteor.Error('500', exception.message);
+        }
+    },
 });

@@ -14,9 +14,9 @@ Meteor.methods({
             const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin');
             if (!isAdmin) {
                 throw new Meteor.Error('403', 'Access denied');
+            } else {
+                Machines.remove(machine);
             }
-
-            Machines.remove(machine);
         } catch (exception) {
             throw new Meteor.Error('500', exception.message);
         }
@@ -25,11 +25,7 @@ Meteor.methods({
         check(machine, {
             name: String,
             dorm: String,
-            inUse: {
-                type: String,
-                allowedValues: ['Available', 'In Use', 'Out of Order'],
-                defaultValue: 'Available',
-            },
+            inUse: String,
             update: String,
             lastUpdated: Date,
         });
@@ -37,9 +33,9 @@ Meteor.methods({
             const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin');
             if (!isAdmin) {
                 throw new Meteor.Error('403', 'Access denied');
+            } else {
+                Machines.insert(machine);
             }
-
-            Machines.insert(machine);
         } catch (exception) {
             throw new Meteor.Error('500', exception.message);
         }

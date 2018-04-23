@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
@@ -11,7 +12,7 @@ export default class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', dorm: '', error: '' };
+    this.state = { email: '', password: '', dorm: '', error: '', success: '' };
     // Ensure that 'this' is bound to this component in these two functions.
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +34,14 @@ export default class Signup extends React.Component {
         // browserHistory.push('/login');
       }
     });
+    // Meteor.call('createUserAcc', { email, username: email, password, dorm }, (err) => {
+    //     if (err) {
+    //         this.setState({ error: err.reason });
+    //     } else {
+    //         this.setState({ success: 'Registration successful' });
+    //         // browserHistory.push('/login');
+    //     }
+    // });
   }
 
   /** Display the signup form. */
