@@ -34,7 +34,10 @@ const inlineStyle = {
 class MachineCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { modalOpen: false };
+    this.state = {
+      modalOpen: false,
+      canModify: Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin')
+    };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -76,7 +79,7 @@ class MachineCard extends React.Component {
           <Card.Content>
             <Card.Header>
               {this.props.machine.name}
-              {Roles.userIsInRole(Meteor.userId(), 'admin') && <Button negative floated='right' size='tiny' icon='close' labelPosition='right' content='Delete' onClick={this.handleDelete}/>}
+              {this.state.canModify && <Button negative floated='right' size='tiny' icon='close' labelPosition='right' content='Delete' onClick={this.handleDelete}/>}
             </Card.Header>
             <Card.Meta>
               <p>Location: {this.props.machine.dorm}</p>

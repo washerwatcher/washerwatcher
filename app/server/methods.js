@@ -11,9 +11,9 @@ Meteor.methods({
             dorm: String,
         });
         try {
-            const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+            const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin');
             if (!isAdmin) {
-                throw new Meteor.Error('Access denied', 'You do not have permission to remove machines.');
+                throw new Meteor.Error('403', 'Access denied');
             }
 
             Machines.remove(machine);

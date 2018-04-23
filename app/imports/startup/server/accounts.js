@@ -15,6 +15,12 @@ function createUser(email, password, role) {
   if (role === 'admin') {
     Roles.addUsersToRoles(userID, 'admin');
   }
+  if (role === 'super-admin') {
+      Roles.addUsersToRoles(userID, 'super-admin');
+  }
+  if (role === 'user' || !role) {
+      Roles.addUsersToRoles(userID, 'user');
+  }
 }
 
 /** When a new account is created, ensure dorm field is added to the account */
@@ -45,6 +51,15 @@ Meteor.publish(null, function publish() {
   return this.ready();
 });
 
+Meteor.publish('userData', function publish() {
+    if (this.userId) {
+        if (Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+            return Meteor.users.find({}, { fields: { username: 1, roles: 1 } });
+        }
+    }
+    return this.ready();
+});
+
 Meteor.methods({
     updateUserDorm(userData) {
         check(userData, {
@@ -65,4 +80,17 @@ Meteor.methods({
             throw new Meteor.Error('500', exception.message);
         }
     },
+    setRole(userData) {
+        check(userData, {
+            id: String,
+            role: String,
+        });
+        try {
+            if (Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+                Roles.setUserRoles(userData.id, userData.role);
+            }
+        } catch (exception) {
+            throw new Meteor.Error('500', exception.message);
+        }
+    }
 });
