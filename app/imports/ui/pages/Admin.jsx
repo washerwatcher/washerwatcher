@@ -1,41 +1,18 @@
 import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Grid, Header, Table } from 'semantic-ui-react';
-import { Bert } from 'meteor/themeteorchef:bert';
+import { Grid, Header, Table, Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import SAdminUserTable from '/imports/ui/components/SAdminUserTable';
 import PropTypes from 'prop-types';
 
 /** Renders the Page for adding a document. */
 class Admin extends React.Component {
-
-    /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
-    constructor(props) {
-        super(props);
-        this.submit = this.submit.bind(this);
-        this.insertCallback = this.insertCallback.bind(this);
-        this.formRef = null;
-    }
-
-    /** Notify the user of the results of the submit. If successful, clear the form. */
-    insertCallback(error) {
-        if (error) {
-            Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
-        } else {
-            Bert.alert({ type: 'success', message: 'Add succeeded' });
-            this.formRef.reset();
-        }
-    }
-
-    /** On submit, insert the data. */
-    submit(data) {
-        const { name, dorm, inUse, lastUpdated } = data;
-        const owner = Meteor.user().username;
-        Machines.insert({ name, dorm, inUse, lastUpdated, owner }, this.insertCallback);
-    }
-
-    /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+    /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
     render() {
+        return (this.props.ready) ? this.renderPage() : <Loader>Getting data</Loader>;
+    }
+    /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+    renderPage() {
         return (
             <Grid container centered>
                 <Grid.Row>
@@ -63,8 +40,8 @@ class Admin extends React.Component {
 
 /** Require a document to be passed to this component. */
 Admin.propTypes = {
-    user: PropTypes.object.isRequired,
     userData: PropTypes.array.isRequired,
+    ready: PropTypes.bool.isRequired,
 };
 
 // export default Admin;
