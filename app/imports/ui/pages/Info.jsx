@@ -15,7 +15,7 @@ class Info extends React.Component {
   render() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">FAQ / Info</Header>
+          <Header as="h2" textAlign="center" className='top-header'>FAQ / Info</Header>
           <List>
             {info.map((item) => <InfoItem key={item.key} item={item} />)}
           </List>

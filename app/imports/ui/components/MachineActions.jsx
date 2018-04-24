@@ -65,7 +65,9 @@ class MachineActions extends React.Component {
                       <Segment>
                         <SelectField name='inUse'/>
                         <TextField name='update'/>
-                        <SubmitField value='Submit'/>
+                        <div className='right-button'>
+                          <SubmitField value='Submit'/>
+                        </div>
                         <ErrorsField/>
                         <HiddenField name='name'/>
                         <HiddenField name='dorm'/>

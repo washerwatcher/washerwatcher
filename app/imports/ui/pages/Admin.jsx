@@ -16,7 +16,7 @@ class Admin extends React.Component {
         return (
             <Grid container centered>
                 <Grid.Row>
-                    <Header as="h2" textAlign="center">Users</Header>
+                    <Header as="h2" textAlign="center" className='top-header'>Users</Header>
                 </Grid.Row>
                 <Grid.Row>
                     <Table celled fixed>

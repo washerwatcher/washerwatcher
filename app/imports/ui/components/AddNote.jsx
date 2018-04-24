@@ -44,7 +44,9 @@ class AddNote extends React.Component {
         }} schema={NoteSchema} onSubmit={this.submit}>
           <Segment>
             <TextField label="Add a timestamped note" name='note'/>
-            <SubmitField value='Submit'/>
+            <div className='right-button'>
+              <SubmitField value='Submit'/>
+            </div>
             <ErrorsField/>
             <HiddenField name='machineId' value={this.props.machineId}/>
             <HiddenField name='createdAt' value={new Date()}/>

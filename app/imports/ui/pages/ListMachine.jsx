@@ -28,7 +28,7 @@ class ListMachines extends React.Component {
         <Container>
           <Grid centered>
             <Grid.Row>
-              <Header as="h2" textAlign="center">Washing Machines</Header>
+              <Header as="h2" textAlign="center" className='top-header'>Washing Machines</Header>
             </Grid.Row>
             {this.state.canModify ? <Grid.Row><AddWasher/></Grid.Row> : ''}
           </Grid>

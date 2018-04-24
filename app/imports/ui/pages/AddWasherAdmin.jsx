@@ -44,7 +44,7 @@ class AddWasherAdmin extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Add Washing Machines</Header>
+            <Header as="h2" textAlign="center" className='top-header'>Add Washing Machines</Header>
             <AutoForm ref={(ref) => { this.formRef = ref; }} schema={MachineSchema} onSubmit={this.submit}>
               <Segment>
                 <TextField name='name'/>

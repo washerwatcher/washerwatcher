@@ -53,7 +53,7 @@ class Preferences extends React.Component {
             <Container>
                 <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
                     <Grid.Column>
-                        <Header as="h2" textAlign="center">
+                        <Header as="h2" textAlign="center" className='top-header'>
                             Preferences
                         </Header>
                         <Form onSubmit={this.handleSubmit}>
@@ -65,7 +65,9 @@ class Preferences extends React.Component {
                                     options={dormOptions}
                                     onChange={this.handleChange}
                                 />
-                                <Form.Button content="Save"/>
+                                <div className='right-button'>
+                                  <Form.Button content="Save"/>
+                                </div>
                             </Segment>
                         </Form>
                     </Grid.Column>
