@@ -20,9 +20,9 @@ class WasherStatus extends React.Component {
 
   render() {
     return (
-        <Card.Description>
+        <div className='status'>
           <Icon name={this.getIconName(this.props.inUse)}/>{this.props.inUse}
-        </Card.Description>
+        </div>
     );
   }
 }

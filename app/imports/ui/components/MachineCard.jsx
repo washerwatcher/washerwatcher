@@ -29,6 +29,15 @@ class MachineCard extends React.Component {
     this.deleteCallback = this.deleteCallback.bind(this);
   }
 
+  getCardColor(status) {
+    if (status === 'Available') {
+      return 'available';
+    } else if (status === 'In Use') {
+      return 'in-use';
+    }
+    return 'out-of-order';
+  }
+
   handleOpen() {
     this.setState({ modalOpen: true });
   }
@@ -46,11 +55,11 @@ class MachineCard extends React.Component {
   }
 
   deleteCallback(error) {
-      if (error) {
-          Bert.alert({ type: 'danger', message: `Machine could not be deleted: ${error.message}` });
-      } else {
-          Bert.alert({ type: 'success', message: 'Machine deleted' });
-      }
+    if (error) {
+      Bert.alert({ type: 'danger', message: `Machine could not be deleted: ${error.message}` });
+    } else {
+      Bert.alert({ type: 'success', message: 'Machine deleted' });
+    }
   }
 
   handleDelete() {
@@ -64,19 +73,22 @@ class MachineCard extends React.Component {
           <Card.Content>
             <Card.Header>
               {this.props.machine.name}
-              {this.state.canModify && <Button negative floated='right' size='tiny' icon='close' labelPosition='right' content='Delete' onClick={this.handleDelete}/>}
+              {this.state.canModify &&
+              <Button basic floated='right' size='tiny' icon='close' onClick={this.handleDelete}/>}
             </Card.Header>
             <Card.Meta>
               <p>Location: {this.props.machine.dorm}</p>
               <p>Last updated: {formatDate(this.props.machine.lastUpdated)}</p>
             </Card.Meta>
-            <WasherStatus inUse={this.props.machine.inUse}/>
-            <Card.Meta>
+            <Card.Description>
               <span>{this.props.machine.update}</span>
-            </Card.Meta>
+            </Card.Description>
           </Card.Content>
-          <Card.Content textAlign='right' extra>
-            <MachineActions machine={this.props.machine} notes={this.props.notes} />
+          <Card.Content extra textAlign='left' className={this.getCardColor(this.props.machine.inUse)}>
+              <Card.Description>
+                <WasherStatus inUse={this.props.machine.inUse} />
+                <MachineActions machine={this.props.machine} notes={this.props.notes} />
+              </Card.Description>
           </Card.Content>
         </Card>
     );

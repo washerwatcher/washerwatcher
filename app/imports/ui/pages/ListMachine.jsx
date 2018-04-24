@@ -16,6 +16,7 @@ class ListMachines extends React.Component {
     this.state = {
         canModify: Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin'),
     };
+    this.sum = 0;
   }
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {

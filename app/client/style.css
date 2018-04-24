@@ -40,3 +40,19 @@
   text-align: right;
 }
 
+.available {
+  background-color: #21BA45 !important;
+}
+
+.out-of-order {
+  background-color: #daa300 !important;
+}
+
+.in-use {
+  background-color: #DB2828 !important;
+}
+
+.status {
+  color: white !important;
+  display: inline-block !important;
+}
