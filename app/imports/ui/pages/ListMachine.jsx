@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import MachineCard from '/imports/ui/components/MachineCard';
 import { Machines } from '../../api/machine/machine';
 import AddWasher from '../components/AddWasher';
+import AvailabilityCount from '../components/AvailabilityCount';
 
 /** Renders a page with all the washing machines as a MachineCard */
 class ListMachines extends React.Component {
@@ -16,7 +17,6 @@ class ListMachines extends React.Component {
     this.state = {
         canModify: Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin'),
     };
-    this.sum = 0;
   }
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -30,6 +30,9 @@ class ListMachines extends React.Component {
           <Grid centered>
             <Grid.Row>
               <Header as="h2" textAlign="center" className='top-header'>Washing Machines</Header>
+            </Grid.Row>
+            <Grid.Row style={{ paddingTop: '0' }}>
+              <AvailabilityCount machines={this.props.machines}/>
             </Grid.Row>
             {this.state.canModify ? <Grid.Row><AddWasher/></Grid.Row> : ''}
           </Grid>

@@ -48,8 +48,8 @@ class MachineActions extends React.Component {
 
   render() {
     return (
-        <Modal trigger={<Button floated='right' onClick={this.handleOpen}>Show Modal</Button>} open={this.state.modalOpen}
-               onClose={this.handleClose} style={inlineStyle.modal}>
+        <Modal trigger={<Button floated='right' onClick={this.handleOpen}>Show Modal</Button>}
+               open={this.state.modalOpen} onClose={this.handleClose} style={inlineStyle.modal}>
           <Modal.Header>
             Update Washer
             <br/>
@@ -61,16 +61,16 @@ class MachineActions extends React.Component {
                 <Container>
                   <Grid.Row>
                     <Header as='h4' textAlign='center'>Update Status</Header>
-                    <AutoForm schema={MachineSchema} onSubmit={this.submit} model={this.props.machine}>
+                    <AutoForm schema={MachineSchema} onSubmit={this.submit}>
                       <Segment>
                         <SelectField name='inUse'/>
-                        <TextField name='update'/>
+                        <TextField name='update' placeholder="What's changed?"/>
                         <div className='right-button'>
                           <SubmitField value='Submit'/>
                         </div>
                         <ErrorsField/>
-                        <HiddenField name='name'/>
-                        <HiddenField name='dorm'/>
+                        <HiddenField name='name' value={this.props.machine.name}/>
+                        <HiddenField name='dorm' value={this.props.machine.dorm}/>
                         <HiddenField name='lastUpdated' value={new Date()}/>
                       </Segment>
                     </AutoForm>

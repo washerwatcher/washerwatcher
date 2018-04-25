@@ -44,11 +44,11 @@
   background-color: #21BA45 !important;
 }
 
-.out-of-order {
+.in-use {
   background-color: #daa300 !important;
 }
 
-.in-use {
+.out-of-order {
   background-color: #DB2828 !important;
 }
 

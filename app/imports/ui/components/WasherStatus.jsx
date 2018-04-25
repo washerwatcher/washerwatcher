@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -9,13 +9,10 @@ class WasherStatus extends React.Component {
   getIconName(status) {
     if (status === 'Available') {
       return 'checkmark';
-    }
-    else if (status === 'In Use') {
+    } else if (status === 'In Use') {
       return 'remove';
     }
-    else {
-      return 'frown';
-    }
+    return 'frown';
   }
 
   render() {
