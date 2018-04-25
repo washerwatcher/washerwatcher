@@ -28,6 +28,7 @@ class MachineActions extends React.Component {
     this.state = { modalOpen: false };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   handleOpen() {
@@ -40,7 +41,8 @@ class MachineActions extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { name, dorm, inUse, update, lastUpdated, _id } = data;
+    const { name, dorm, inUse, update, lastUpdated } = data;
+    const _id = this.props.machine._id;
     Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
         Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
         Bert.alert({ type: 'success', message: 'Update succeeded' })));
