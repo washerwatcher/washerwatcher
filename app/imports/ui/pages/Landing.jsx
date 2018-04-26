@@ -46,8 +46,9 @@ class Landing extends React.Component {
           <Grid>
             <Grid.Row centered>
               <Grid.Column textAlign='center'>
-                <Header as='h1' inverted className='instruct'> To get started, login now</Header>
-                <Button as={NavLink} activeClassName="active" exact to="/signin" key='signin'>Log In</Button>
+                <Header as='h1' inverted className='instruct'> To get started, login or register now</Header>
+                <Button className='buttoning' as={NavLink} activeClassName="active" exact to="/signin" key='signin'>Log In</Button>
+                <Button as={NavLink} activeClassName="active" exact to="/signup" key='signup'>Register Now</Button>
               </Grid.Column>
             </Grid.Row>
 
