@@ -30,9 +30,9 @@ class WashingMachineNotes extends React.Component {
             </Grid.Column>
             <Grid.Column>
               <Header as='h3' textAlign='center'>Notes</Header>
-              <NoteFeed notes={this.props.notes} />
+              <NoteFeed notes={this.props.notes}/>
               <Header as='h3' textAlign='center'>Add Note</Header>
-              <AddNote machineId={this.props.doc._id} />
+              <AddNote machineId={this.props.doc._id}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

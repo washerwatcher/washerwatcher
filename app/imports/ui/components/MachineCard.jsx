@@ -32,9 +32,10 @@ class MachineCard extends React.Component {
   getCardColor(status) {
     if (status === 'Available') {
       return 'available';
-    } else if (status === 'In Use') {
-      return 'in-use';
-    }
+    } else
+      if (status === 'In Use') {
+        return 'in-use';
+      }
     return 'out-of-order';
   }
 
@@ -85,10 +86,10 @@ class MachineCard extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra textAlign='left' className={this.getCardColor(this.props.machine.inUse)}>
-              <Card.Description>
-                <WasherStatus inUse={this.props.machine.inUse} />
-                <MachineActions machine={this.props.machine} notes={this.props.notes} />
-              </Card.Description>
+            <Card.Description>
+              <WasherStatus inUse={this.props.machine.inUse}/>
+              <MachineActions machine={this.props.machine} notes={this.props.notes}/>
+            </Card.Description>
           </Card.Content>
         </Card>
     );

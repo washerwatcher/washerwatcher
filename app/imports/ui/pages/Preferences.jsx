@@ -51,7 +51,7 @@ class Preferences extends React.Component {
   render() {
     return (
         <Container>
-          <Grid centered columns={1}>
+          <Grid verticalAlign="middle" centered columns={1}>
             <Grid.Column>
               <Header as="h2" textAlign="center" className='top-header'>
                 Preferences
