@@ -16,21 +16,21 @@ function createUser(email, password, role) {
     Roles.addUsersToRoles(userID, 'admin');
   }
   if (role === 'super-admin') {
-      Roles.addUsersToRoles(userID, 'super-admin');
+    Roles.addUsersToRoles(userID, 'super-admin');
   }
   if (role === 'user') {
-      Roles.addUsersToRoles(userID, 'user');
+    Roles.addUsersToRoles(userID, 'user');
   }
 }
 
 /** When a new account is created, ensure dorm field is added to the account */
 /* eslint-disable */
 Accounts.onCreateUser((options, user) => {
-    user.dorm = Object.is(options.dorm, undefined) ? '' : options.dorm;
-    if (options.profile) {
-        user.profile = options.profile;
-    }
-    return user;
+  user.dorm = Object.is(options.dorm, undefined) ? '' : options.dorm;
+  if (options.profile) {
+    user.profile = options.profile;
+  }
+  return user;
 });
 /* eslint-enable */
 
@@ -46,65 +46,70 @@ if (Meteor.users.find().count() === 0) {
 
 Meteor.publish(null, function publish() {
   if (this.userId) {
-      return Meteor.users.find({ _id: Meteor.userId() }, { fields: { dorm: 1 } });
+    return Meteor.users.find({ _id: Meteor.userId() }, { fields: { dorm: 1 } });
   }
   return this.ready();
 });
 
 Meteor.publish('userData', function publish() {
-    if (this.userId) {
-        if (Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
-            return Meteor.users.find({}, { fields: { username: 1, roles: 1 } });
-        }
+  if (this.userId) {
+    if (Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+      return Meteor.users.find({}, { fields: { username: 1, roles: 1 } });
     }
-    return this.ready();
+  }
+  return this.ready();
 });
 
 Meteor.methods({
-    updateUserDorm(userData) {
-        check(userData, {
-            id: String,
-            dorm: String,
-        });
-        try {
-            if (Meteor.userId() !== userData.id) {
-                throw new Meteor.Error('Invalid user ID', 'Cannot update the data of a different user!');
-            }
+  updateUserDorm(userData) {
+    check(userData, {
+      id: String,
+      dorm: String,
+    });
+    try {
+      if (Meteor.userId() !== userData.id) {
+        throw new Meteor.Error('Invalid user ID', 'Cannot update the data of a different user!');
+      }
 
-            Meteor.users.update(userData.id, {
-                $set: {
-                    dorm: userData.dorm,
-                },
-            });
-        } catch (exception) {
-            throw new Meteor.Error('500', exception.message);
-        }
-    },
-    setRole(userData) {
-        check(userData, {
-            id: String,
-            role: String,
-        });
-        try {
-            if (Roles.userIsInRole(Meteor.userId(), 'super-admin') || Meteor.isServer) {
-                Roles.setUserRoles(userData.id, userData.role);
-            }
-        } catch (exception) {
-            throw new Meteor.Error('500', exception.message);
-        }
-    },
-    createUserAcc(userData) {
-        check(userData, {
-            email: String,
-            username: String,
-            password: String,
-            dorm: String,
-        });
-        try {
-            const userId = Accounts.createUser({ email: userData.email, username: userData.email, password: userData.password, dorm: userData.dorm });
-            Roles.addUsersToRoles(userId, 'user');
-        } catch (exception) {
-            throw new Meteor.Error('500', exception.message);
-        }
-    },
+      Meteor.users.update(userData.id, {
+        $set: {
+          dorm: userData.dorm,
+        },
+      });
+    } catch (exception) {
+      throw new Meteor.Error('500', exception.message);
+    }
+  },
+  setRole(userData) {
+    check(userData, {
+      id: String,
+      role: String,
+    });
+    try {
+      if (Roles.userIsInRole(Meteor.userId(), 'super-admin') || Meteor.isServer) {
+        Roles.setUserRoles(userData.id, userData.role);
+      }
+    } catch (exception) {
+      throw new Meteor.Error('500', exception.message);
+    }
+  },
+  createUserAcc(userData) {
+    check(userData, {
+      email: String,
+      username: String,
+      password: String,
+      dorm: String,
+    });
+    try {
+      const userId = Accounts.createUser({
+        email: userData.email,
+        username: userData.email,
+        password: userData.password,
+        dorm: userData.dorm
+      });
+      Roles.addUsersToRoles(userId, 'user');
+    } catch (exception) {
+      throw new Meteor.Error('500', exception.message);
+    }
+  },
 });

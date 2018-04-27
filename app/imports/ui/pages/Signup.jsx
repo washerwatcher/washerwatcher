@@ -48,7 +48,7 @@ export default class Signup extends React.Component {
   render() {
     if (this.state.createdAcc) {
       // Redirect to machines on successful sign up
-      return <Redirect to={'/machines'} />;
+      return <Redirect to={'/machines'}/>;
     }
 
     return (

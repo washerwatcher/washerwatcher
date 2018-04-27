@@ -47,7 +47,7 @@ export default class Signin extends React.Component {
       if (from.pathname !== '/') {
         return <Redirect to={from}/>;
       }
-      return <Redirect to={'/machines'} />;
+      return <Redirect to={'/machines'}/>;
     }
     // Otherwise return the Login form.
     return (

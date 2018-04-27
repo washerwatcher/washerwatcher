@@ -15,9 +15,10 @@ class ListMachines extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        canModify: Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin'),
+      canModify: Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin'),
     };
   }
+
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader>Getting data</Loader>;
@@ -38,16 +39,18 @@ class ListMachines extends React.Component {
           </Grid>
           {this.props.machines.length === 0 ?
               <Message>
-                  <Message.Header>
-                      No washing machines found!
-                  </Message.Header>
-                  <p>
-                      It looks like either your dorm does not have any washing machines or you have not set your dorm. <br/>
-                      <NavLink to='/preferences'>Click here</NavLink> to go to your preferences to set your dorm if you have not done so already.
-                  </p>
+                <Message.Header>
+                  No washing machines found!
+                </Message.Header>
+                <p>
+                  It looks like either your dorm does not have any washing machines or you have not set your dorm. <br/>
+                  <NavLink to='/preferences'>Click here</NavLink> to go to your preferences to set your dorm if you have
+                  not done so already.
+                </p>
               </Message>
               :
-              <Card.Group>{this.props.machines.map((machine) => <MachineCard key={machine._id} machine={machine} />)}</Card.Group>}
+              <Card.Group>{this.props.machines.map((machine) => <MachineCard key={machine._id}
+                                                                             machine={machine}/>)}</Card.Group>}
         </Container>
     );
   }
