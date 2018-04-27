@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Grid, Icon, Header, Image, Button } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
@@ -43,20 +44,22 @@ class Landing extends React.Component {
             </Grid.Row>
           </Grid>
 
-          <Grid>
-            <Grid.Row centered>
-              <Grid.Column textAlign='center'>
-                <Header as='h1' inverted className='instruct'> To get started, login or register now</Header>
-                <Button className='buttoning' as={NavLink} activeClassName="active" exact to="/signin" key='signin'>Log In</Button>
-                <Button as={NavLink} activeClassName="active" exact to="/signup" key='signup'>Register Now</Button>
-              </Grid.Column>
-            </Grid.Row>
+          {!Meteor.userId() &&
+            <Grid>
+              <Grid.Row centered>
+                <Grid.Column textAlign='center'>
+                  <Header as='h1' inverted className='instruct'> To get started, login or register now</Header>
+                  <Button className='buttoning' as={NavLink} activeClassName="active" exact to="/signin" key='signin'>
+                    Log In
+                  </Button>
+                  <Button as={NavLink} activeClassName="active" exact to="/signup" key='signup'>Register Now</Button>
+                </Grid.Column>
+              </Grid.Row>
 
-            <Grid.Row className='blankspace'>
-            </Grid.Row>
-          </Grid>
-
-
+              <Grid.Row className='blankspace'>
+              </Grid.Row>
+            </Grid>
+          }
         </div>
     );
   }
