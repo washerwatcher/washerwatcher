@@ -13,7 +13,7 @@ Meteor.methods({
     try {
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin');
       if (!isAdmin) {
-        throw new Meteor.Error('403', 'Access denied');
+        throw new Meteor.Error('401', 'Access denied');
       } else {
         Machines.remove(machine);
       }
@@ -32,10 +32,26 @@ Meteor.methods({
     try {
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin') || Roles.userIsInRole(Meteor.userId(), 'super-admin');
       if (!isAdmin) {
-        throw new Meteor.Error('403', 'Access denied');
+        throw new Meteor.Error('401', 'Access denied');
       } else {
         Machines.insert(machine);
       }
+    } catch (exception) {
+      throw new Meteor.Error('500', exception.message);
+    }
+  },
+  updateMachine(machine) {
+    check(machine, {
+      _id: String,
+      name: String,
+      dorm: String,
+      inUse: String,
+      update: String,
+      lastUpdated: Date,
+    });
+    try {
+      const { _id, name, dorm, inUse, update, lastUpdated } = machine;
+      Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } });
     } catch (exception) {
       throw new Meteor.Error('500', exception.message);
     }

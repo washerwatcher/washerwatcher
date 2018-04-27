@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Button, Modal, Grid, Header, Segment, Container } from 'semantic-ui-react';
 import { Machines, MachineSchema } from '/imports/api/machine/machine';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -43,9 +44,16 @@ class MachineActions extends React.Component {
   submit(data) {
     const { name, dorm, inUse, update, lastUpdated } = data;
     const _id = this.props.machine._id;
-    Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
-        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
-        Bert.alert({ type: 'success', message: 'Update succeeded' })));
+    const machine = { _id, name, dorm, inUse, update, lastUpdated };
+    Meteor.call('updateMachine', machine, this.updateCallback);
+  }
+
+  updateCallback = (error) => {
+    if (error) {
+      Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` });
+    }
+
+    Bert.alert({ type: 'success', message: 'Update succeeded' });
   }
 
   render() {
