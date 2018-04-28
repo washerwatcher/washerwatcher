@@ -2,7 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Button, Card } from 'semantic-ui-react';
-import { Machines } from '/imports/api/machine/machine';
 import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -45,14 +44,6 @@ class MachineCard extends React.Component {
 
   handleClose() {
     this.setState({ modalOpen: false });
-  }
-
-  /** On successful submit, insert the data. */
-  submit(data) {
-    const { name, dorm, inUse, update, lastUpdated, _id } = data;
-    Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
-        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}`, style: 'growl-bottom-right' }) :
-        Bert.alert({ type: 'success', message: 'Update succeeded', style: 'growl-bottom-right' })));
   }
 
   deleteCallback(error) {
