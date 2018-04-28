@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Button, Modal, Grid, Header, Segment, Container } from 'semantic-ui-react';
-import { Machines, MachineSchema } from '/imports/api/machine/machine';
+import { MachineSchema } from '/imports/api/machine/machine';
 import { Bert } from 'meteor/themeteorchef:bert';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -50,10 +50,10 @@ class MachineActions extends React.Component {
 
   updateCallback = (error) => {
     if (error) {
-      Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` });
+      Bert.alert({ type: 'danger', message: `Update failed: ${error.message}`, style: 'growl-bottom-right' });
     }
 
-    Bert.alert({ type: 'success', message: 'Update succeeded' });
+    Bert.alert({ type: 'success', message: 'Update succeeded', style: 'growl-bottom-right' });
   }
 
   render() {
