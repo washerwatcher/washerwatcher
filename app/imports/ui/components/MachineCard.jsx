@@ -51,15 +51,15 @@ class MachineCard extends React.Component {
   submit(data) {
     const { name, dorm, inUse, update, lastUpdated, _id } = data;
     Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
-        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
-        Bert.alert({ type: 'success', message: 'Update succeeded' })));
+        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}`, style: 'growl-bottom-right' }) :
+        Bert.alert({ type: 'success', message: 'Update succeeded', style: 'growl-bottom-right' })));
   }
 
   deleteCallback(error) {
     if (error) {
-      Bert.alert({ type: 'danger', message: `Machine could not be deleted: ${error.message}` });
+      Bert.alert({ type: 'danger', message: `Machine could not be deleted: ${error.message}`, style: 'growl-bottom-right' });
     } else {
-      Bert.alert({ type: 'success', message: 'Machine deleted' });
+      Bert.alert({ type: 'success', message: 'Machine deleted', style: 'growl-bottom-right' });
     }
   }
 

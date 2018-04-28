@@ -19,8 +19,8 @@ class UpdateWasherStatus extends React.Component {
   submit(data) {
     const { name, dorm, inUse, update, lastUpdated, _id } = data;
     Machines.update(_id, { $set: { name, dorm, inUse, update, lastUpdated } }, (error) => (error ?
-        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
-        Bert.alert({ type: 'success', message: 'Update succeeded' })));
+        Bert.alert({ type: 'danger', message: `Update failed: ${error.message}`, style: 'growl-bottom-right' }) :
+        Bert.alert({ type: 'success', message: 'Update succeeded', style: 'growl-bottom-right' })));
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */

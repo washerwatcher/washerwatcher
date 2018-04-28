@@ -24,9 +24,9 @@ class Preferences extends React.Component {
   /** Notify the user of the results of the submit. If successful, clear the form. */
   insertCallback(error) {
     if (error) {
-      Bert.alert({ type: 'danger', message: `Settings not saved!: ${error.message}` });
+      Bert.alert({ type: 'danger', message: `Settings not saved!: ${error.message}`, style: 'growl-bottom-right' });
     } else {
-      Bert.alert({ type: 'success', message: 'Saved settings' });
+      Bert.alert({ type: 'success', message: 'Saved settings', style: 'growl-bottom-right' });
     }
   }
 
