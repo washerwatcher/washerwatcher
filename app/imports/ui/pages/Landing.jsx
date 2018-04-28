@@ -1,7 +1,15 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Grid, Icon, Header, Image, Button } from 'semantic-ui-react';
+import { Grid, Icon, Header, Image, Button, Modal } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
+
+const inlineStyle = {
+  modal: {
+    marginTop: '0px !important',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+};
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -26,19 +34,31 @@ class Landing extends React.Component {
               <Icon size='huge' name='group' inverted/>
               <Header as='h1' inverted>Individual Accounts</Header>
               <Header as='h3' inverted>When a user creates an account, it will be personalized towards them</Header>
-              <Image src='/images/Register.PNG'/>
+              <Modal trigger={<Image src='/images/Register.PNG'/>} style={inlineStyle.modal} size='large'>
+                <Modal.Content>
+                  <Image src='/images/Register.PNG'/>
+                </Modal.Content>
+              </Modal>
             </Grid.Column>
             <Grid.Column textAlign='center'>
               <Icon size='huge' name='file text' inverted/>
               <Header as='h1' inverted>View Washing Machine Availability</Header>
               <Header as='h3' inverted>See the availability of every washing machine in your dorm</Header>
-              <Image src='/images/Availability.PNG'/>
+              <Modal trigger={<Image src='/images/Availability.PNG'/>} style={inlineStyle.modal} size='large'>
+                <Modal.Content>
+                  <Image src='/images/Availability.PNG'/>
+                </Modal.Content>
+              </Modal>
             </Grid.Column>
             <Grid.Column textAlign='center'>
               <Icon size='huge' name='checked calendar' inverted/>
               <Header as='h1' inverted>Timestamped Notes</Header>
               <Header as='h3' inverted>View and add timestamped notes about your washer</Header>
-              <Image src='/images/Notes.PNG'/>
+              <Modal trigger={<Image src='/images/Notes.PNG'/>} style={inlineStyle.modal} size='large'>
+                <Modal.Content>
+                  <Image src='/images/Notes.PNG'/>
+                </Modal.Content>
+              </Modal>
             </Grid.Column>
             <Grid.Row className='blankspace'>
             </Grid.Row>
