@@ -58,7 +58,7 @@ class MachineActions extends React.Component {
 
   render() {
     return (
-        <Modal trigger={<Button floated='right' onClick={this.handleOpen}>Show Modal</Button>}
+        <Modal trigger={<Button floated='right' onClick={this.handleOpen}>Show Actions</Button>}
                open={this.state.modalOpen} onClose={this.handleClose} style={inlineStyle.modal}>
           <Modal.Header>
             Update Washer

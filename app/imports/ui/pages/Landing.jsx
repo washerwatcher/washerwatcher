@@ -34,9 +34,9 @@ class Landing extends React.Component {
               <Icon size='huge' name='group' inverted/>
               <Header as='h1' inverted>Individual Accounts</Header>
               <Header as='h3' inverted>When a user creates an account, it will be personalized towards them</Header>
-              <Modal trigger={<Image src='/images/Register.PNG'/>} style={inlineStyle.modal} size='large'>
+              <Modal trigger={<Image src='/images/Register1.png'/>} style={inlineStyle.modal} size='large'>
                 <Modal.Content>
-                  <Image src='/images/Register.PNG'/>
+                  <Image src='/images/Register1.png'/>
                 </Modal.Content>
               </Modal>
             </Grid.Column>
@@ -44,9 +44,9 @@ class Landing extends React.Component {
               <Icon size='huge' name='file text' inverted/>
               <Header as='h1' inverted>View Washing Machine Availability</Header>
               <Header as='h3' inverted>See the availability of every washing machine in your dorm</Header>
-              <Modal trigger={<Image src='/images/Availability.PNG'/>} style={inlineStyle.modal} size='large'>
+              <Modal trigger={<Image src='/images/Availability1.png'/>} style={inlineStyle.modal} size='large'>
                 <Modal.Content>
-                  <Image src='/images/Availability.PNG'/>
+                  <Image src='/images/Availability1.png'/>
                 </Modal.Content>
               </Modal>
             </Grid.Column>
@@ -54,9 +54,9 @@ class Landing extends React.Component {
               <Icon size='huge' name='checked calendar' inverted/>
               <Header as='h1' inverted>Timestamped Notes</Header>
               <Header as='h3' inverted>View and add timestamped notes about your washer</Header>
-              <Modal trigger={<Image src='/images/Notes.PNG'/>} style={inlineStyle.modal} size='large'>
+              <Modal trigger={<Image src='/images/Actions.png'/>} style={inlineStyle.modal} size='large'>
                 <Modal.Content>
-                  <Image src='/images/Notes.PNG'/>
+                  <Image src='/images/Actions.png'/>
                 </Modal.Content>
               </Modal>
             </Grid.Column>
