@@ -22,7 +22,7 @@ const inlineStyle = {
   },
 };
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+
 class MachineActions extends React.Component {
   constructor(props) {
     super(props);

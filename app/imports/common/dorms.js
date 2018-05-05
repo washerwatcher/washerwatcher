@@ -2,7 +2,7 @@ const dormOptions = [
   { value: 'All', text: 'All' },
   { value: 'Frear Hall', text: 'Frear Hall' },
   { value: 'Gateway House', text: 'Gateway House' },
-  { value: 'Hale Anuenu', text: 'Hale Anuenue' },
+  { value: 'Hale Anuenue', text: 'Hale Anuenue' },
   { value: 'Hale Laulima', text: 'Hale Laulima' },
   { value: 'Hale Kahawai', text: 'Hale Kahawai' },
   { value: 'Johnson Hall', text: 'Johnson Hall' },

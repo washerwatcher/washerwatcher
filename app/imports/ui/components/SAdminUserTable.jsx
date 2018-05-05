@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Roles } from 'meteor/alanning:roles';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class SAdminUserTable extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
